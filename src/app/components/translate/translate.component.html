@@ -1,0 +1,10 @@
+
+<ng-select [searchable]="false" [(ngModel)]="selectedLang" (change)="switchLanguage($event)">
+  <ng-option *ngFor="let lan of global.languages" [value]="lan.val" >{{lan.name}}</ng-option>
+</ng-select>
+
+<!--<select class="lastick-widget-lang-select nice-select" [(ngModel)]="selectedLang" (ngModelChange)="switchLanguage($event)">&lt;!&ndash;  &ndash;&gt;-->
+  <!--<option *ngFor="let lan of global.languages" [value]="lan.val">-->
+    <!--{{lan.name}}-->
+  <!--</option>-->
+<!--</select>-->

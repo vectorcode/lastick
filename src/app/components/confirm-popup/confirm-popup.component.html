@@ -1,0 +1,22 @@
+<div class="b" *ngIf="show">
+  <div class="b__block">
+    <div class="b__row">
+      <p class="b__text">
+        Пожалуйста, убедитесь, что ваш номер телефона и email введены правильно
+      </p>
+    </div>
+    <div class="b__row">
+      <div class="b__row-row" *ngFor="let value of values"><div class="b__value">{{value}}</div></div>
+    </div>
+    <div class="b__footer">
+      <div class="b__buttons">
+        <div class="b__btn-item">
+          <span class="b__btn" (click)="onCancelClick()">Изменить</span>
+        </div>
+        <div class="b__btn-item">
+          <span class="b__btn b__btn_success" (click)="onSuccessClick()">Верно</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

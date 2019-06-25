@@ -1,0 +1,159 @@
+:host {
+  flex-basis: 242px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-left: 3px solid #2b2b2b;
+  position: relative;
+  background: #252525;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+}
+
+.sidebar-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.sidebar-bg div {
+  width: 100%;
+  top: 40%;
+  text-align: center;
+  position: relative;
+}
+
+
+.sidebar-bg span {
+  display: inline-block;
+  padding-top: 18px;
+  color: #fff;
+  opacity: 0.2;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  width: 110px;
+
+}
+
+.sidebar-bg img {
+  width: 57px;
+}
+
+.cart-button {
+  width: 204.4px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: #cba150;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  color: #ffffff;
+}
+
+.cart-button-holder {
+  padding: 17px 0;
+  text-align: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.cart-summary-wrapper {
+  display: block;
+  margin: 0 20px;
+}
+
+.cart-summary div span {
+  opacity: 0.3;
+  font-size: 14px;
+  float: left;
+  color: #ffffff;
+}
+
+.cart-summary div {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.cart-summary div:first-child {
+  margin-top: 15px
+}
+
+.cart-summary .total {
+  color: #cba150;
+}
+
+.cart-items {
+  margin: 0 10px 0 20px;
+  border-bottom: 3px solid #2b2b2b;
+  //display: flex;
+  flex-basis: 50%;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+  padding-top: 7px;
+  overflow: hidden;
+}
+
+.cart-button:disabled {
+  background-color: #cba150;
+  opacity: 0.5;
+}
+
+
+.regular-text {
+  display: inline;
+}
+.variable-text {
+  display: none;
+}
+
+:host ::ng-deep perfect-scrollbar > .ps.ps--scrolling-y > .ps__rail-y,
+:host ::ng-deep perfect-scrollbar > .ps.ps--scrolling-x > .ps__rail-x,
+:host ::ng-deep .ps .ps__rail-x:hover,
+:host ::ng-deep .ps .ps__rail-y:hover,
+:host ::ng-deep .ps .ps__rail-x:focus,
+:host ::ng-deep .ps .ps__rail-y:focus,
+:host ::ng-deep .ps .ps__rail-x.ps--clicking,
+:host ::ng-deep .ps .ps__rail-y.ps--clicking {
+  background: transparent;
+}
+
+
+
+@media screen and (max-width: 650px) {
+  :host {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-grow: 1;
+    flex-basis: 100%;
+    border: none;
+    height: auto;
+    background: transparent;
+  }
+  .cart-items, .cart-summary, .sidebar-bg  {
+    display: none;
+  }
+
+  .cart-button {
+    flex: 1;
+    width: 100%;
+  }
+  .cart-button-holder {
+    padding: 0 10px 10px 10px;
+  }
+
+  .regular-text {
+    display: none;
+  }
+  .variable-text {
+    display: inline;
+  }
+}

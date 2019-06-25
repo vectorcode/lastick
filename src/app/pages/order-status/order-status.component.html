@@ -1,0 +1,61 @@
+<app-header type="order"></app-header>
+
+<section class="lastick-widget-main" *ngIf="isValidStatus()">
+  <div class="lastick-widget-main_inner">
+    <div class="index_entrance final_screen-cert sm">
+
+      <header class="index_entrance-header">
+        <div class="failure-title">
+          <div class="logo logo_lastick">
+          </div>
+        </div>
+      </header>
+
+      <div *ngIf="!checkSuccess()">
+        <article class="index_entrance-article failure">
+          <h1>{{ 'OrderFail.Title' | translate }}</h1>
+          <div class="order-number failure">
+            <div class="failure-cross"></div>
+          </div>
+        </article>
+
+        <article class="final_screen-info">
+          <p class="failure-number" *ngIf="data">{{ 'OrderFail.Code' | translate }}: {{ data.number }}</p>
+          <p class="white">{{ 'OrderFail.Mercy' | translate }}</p>
+          <div class="failure-contacts">
+            <div class="item">+7 495 120-42-14</div>
+            <div class="item last">support@lastick.ru</div>
+          </div>
+        </article>
+      </div>
+
+      <div *ngIf="checkSuccess()">
+        <article class="index_entrance-article">
+          <h1>{{ 'Success.Thx' | translate }}<br>{{ 'Success.ThxText' | translate }}</h1>
+          <div *ngIf="data">
+            <div class="order-number">
+              <h4>{{ 'Success.Code' | translate }}</h4>
+              <span class="number">{{ data.number }}</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="final_screen-info">
+          <p class="white">
+            {{ 'Success.Info' | translate }}
+          </p>
+          <!--<p class="coal">-->
+            <!--{{ 'Success.Independently' | translate }}-->
+          <!--</p>-->
+        </article>
+      </div>
+
+      <div class="final_screen-button">
+        <a routerLink="" class="button b-button w-100">{{ 'Success.Back' | translate }}</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

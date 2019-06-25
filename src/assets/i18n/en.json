@@ -1,0 +1,135 @@
+{
+  "Buy": {
+    "Title": "Gift Certificate",
+    "Description": "Enter the number of the Gift Certificate to check available events and prices",
+    "Buy": "Buy",
+    "Activate": "Activate"
+  },
+  "Gift": {
+    "H1": "Gift Certificate",
+    "Count": "Nominal and quantity",
+    "Who": "Recipient",
+    "Gift": "Gift",
+    "From": "Who",
+    "When": "When",
+    "Message": "Message",
+    "Email": "Email for delivery",
+    "AddresseeEmail": "Addressee Email",
+    "GiverEmail": "Giver Email",
+    "Buy": "Buy",
+    "On": "on",
+    "Denomination": "Its denomination",
+    "HowUse": "How to use it?"
+  },
+  "Confirm": {
+    "H1": "Gift Certificate",
+    "Title": "Confirmation of an order",
+    "SertificateOn": "Certificate for",
+    "On": "on",
+    "Service": "Service Fee",
+    "Total": "Total for payment",
+    "Total2": "Total",
+    "WritePromo": "Enter a promotional code",
+    "HavePromo": "I have a promotional code",
+    "Promo": "Promotional code",
+    "Phone": "Phone",
+    "Cancel": "Cancel",
+    "Save": "Apply",
+    "Buy": "Pay now",
+    "Condition": "By clicking the 'Pay' button, I agree to the Terms and Conditions for Processing Personal Data",
+    "Condition2": "By clicking the 'Done' button, I agree to the Terms and Conditions for Processing Personal Data",
+    "Tickets": "Tickets",
+    "Offers": "Special offers from partners",
+    "Contacts": "Contac info",
+    "Payments": "Payment Methods",
+    "Denomination": "Denomination",
+    "Done": "Done"
+  },
+  "OrderFail": {
+    "Title": "Failed to create an order",
+    "Code": "Order code",
+    "Mercy": "Sorry for the inconvenience. Please contact support with your order number",
+    "Back": "Return to site"
+  },
+  "GiftActivate": {
+    "Title": "Activate certificate",
+    "Description": "Enter the identification number of the Gift Certificate, to check the available events and prices",
+    "Placeholder": "Identification number of the certificate ",
+    "Activate": "Activate"
+  },
+  "GiftActivated": {
+    "Title": "Activation successful!",
+    "Description": "Enter the identification number of the Gift Certificate, to check the available events and prices",
+    "Text" : "Gift Certificate for:",
+    "Value" : "Denomination",
+    "Denomination" : "Valid until",
+    "BtnTxt" : "Choose an event"
+  },
+  "EventTickets": {
+    "Tab1" : "SCHEDULE AND TICKETS",
+    "Tab2" : "Description",
+    "subTitle" : "Music genres",
+    "BtnTxt" : "Choose seats",
+    "Min" : "of",
+    "Duration": "Duration"
+  },
+  "EntranceTickets": {
+    "EntTickets" : "Entrance tickets",
+    "Workshops" : "WORKSHOPS",
+    "Lectures": "LECTURES",
+    "ChooseTxt": "Choose the date and time of the visit, the museum works on",
+    "Tooday" : "Today",
+    "Tomorrow" : "Tomorrow",
+    "AnotherDay": "Another day",
+    "Tickets": "TICKETS",
+    "TextBtn1": "Continue with ",
+    "TextBtn2": "ticket(s) on "
+  },
+  "Success": {
+    "Write": "Certificate issued!",
+    "Written": "Written",
+    "Nominal": "Nominal",
+    "ValidUntil": "Valid until",
+    "Info": "The order information has been sent to your e-mail address, you will also receive SMS notification",
+    "Independently": "If necessary, you can independently",
+    "Cancel": "cancel the order",
+    "Back": "Return to the site",
+    "Thx": "Thanks!",
+    "ThxText": "Your order has been successfully paid",
+    "Code": "Order code"
+  },
+  "Header": {
+    "Use": "How to use?"
+  },
+  "Footer": {
+    "Term": "Terms of use",
+    "Hour": "24 hours",
+    "Copyright": "The service is provided by the service Lastick"
+  },
+  "Popup": {
+    "Title": "How to use the certificate?",
+    "Close": "Close"
+  },
+  "All": {
+    "Rub1": "ruble",
+    "Rub2": "ruble",
+    "Rub3": "rubles",
+    "Certificate1": "certificate",
+    "Certificate2": "certificate",
+    "Certificate3": "certificates",
+    "HeaderValue" : "Denomination:",
+    "All" : "All",
+    "Events": "Events"
+  },
+  "HallSchema": {
+    "ROW": "row",
+    "SEAT": "seat",
+    "SECTOR": "section",
+    "PLACE_VIEW": "place view",
+    "SELECT_PLACE_HINT": "Select your seats",
+    "CHECKOUT": "Checkout",
+    "CONTINUE_TO_PAYMENT_WITH": "Selected {ticketsCount} {ticketsCount, plural, =0{tickets} one{ticket} other{tickets}} for {amount} р",
+    "TAKEN_PLACE": "Taken seat",
+    "SELECTED_PLACES": "Selected seats"
+  }
+}

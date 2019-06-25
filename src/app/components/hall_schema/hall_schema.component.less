@@ -1,0 +1,34 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  align-items: stretch;
+  pointer-events: all;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background: #252525;
+  pointer-events: none;
+}
+
+svg.animate > g {
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+::ng-deep circle {
+  fill: #d69743;
+}
+
+::ng-deep .sector-path {
+  fill: none;
+  // stroke: #fff;
+}
+

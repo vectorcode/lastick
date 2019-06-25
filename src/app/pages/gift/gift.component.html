@@ -1,0 +1,108 @@
+<div class="popup-container" [ngClass]="{'active': popup}">
+    <div class="popup small">
+        <span (click)="popup = !popup" class="popup-closebutton cr-p" title="{{ 'Popup.Close' | translate }}">x</span>
+        <header class="popup-header">
+            <h3>{{ 'Popup.Title' | translate }}</h3>
+        </header>
+        <article class="popup-article">
+            <!--{{ 'Popup.Text' | translate }}-->
+          Выберите номинал сертификата, выбрать можно из предлагаемых или ввести свой. Укажите способ получения, можно приобрести для себя или в подарок. Сертификат будет направлен на почту получателя, не забудьте проверить папку Спам. Перейдите на страницу активации и введите номер сертификата. Номер сертификата будет указан в письме и в приобретенном сертификате.
+        </article>
+    </div>
+</div>
+
+<app-header (popupOpen)="popupOpen()"></app-header>
+
+<section class="lastick-widget-main">
+    <div class="head-bg head-bg_t-0"></div>
+    <div class="lastick-widget-main_inner">
+        <div class="gift sm">
+
+            <header class="index_entrance-header">
+                <div class="logo"></div>
+            </header>
+
+            <article class="index_entrance-article">
+                <h1>{{ name[currentLang] }}</h1>
+            </article>
+
+            <section class="gift-body">
+                <form [formGroup]="giftForm" (submit)="onSubmit()">
+                    <div class="gift-body_left">
+                        <h3>{{ 'Gift.Count' | translate }}</h3>
+                        <div class="gift-items">
+                            <div class="gift-item fl" *ngFor="let price of prices">
+                                <div class="nominal">{{ price | money }} {{ price | numerative: ['All.Rub1' | translate, 'All.Rub2' | translate, 'All.Rub3' | translate] }}</div>
+                                <div class="quantity q-32">
+                                    <span class="q-minus cr-p" (click)="priceMinus(price)" title="">-</span>
+                                    <span class="result">{{ priceCount[price] }}</span>
+                                    <span class="q-plus cr-p" (click)="pricePlus(price)" title="">+</span>
+                                </div>
+                            </div>
+                            <div class="gift-item fl last" *ngIf="denomination">
+                                <div class="nominal custom">
+                                    <input type="number" min="{{ pricesRange[0] ? pricesRange[0] / 100 : '' }}" max="{{ pricesRange[1] ? pricesRange[1] / 100 : '' }}" (change)="denominationChange()" [(ngModel)]="denominationPrice" [ngModelOptions]="{standalone: true}" placeholder="{{ 'Gift.Denomination' | translate }}">
+                                  <div style="line-height: 1.3; width: 130px; margin-top: 10px;">
+                                    <span *ngIf="denominationPrice">{{ denominationPrice }} {{ denominationPrice | numerative: ['All.Rub1' | translate, 'All.Rub2' | translate, 'All.Rub3' | translate] }}</span>
+                                  </div>
+                                </div>
+                                <div class="quantity q-32">
+                                    <span class="q-minus cr-p" (click)="denominationMinus(denominationPrice * 100)" title="">-</span>
+                                    <span class="result">{{ denominationNumber }}</span>
+                                    <span class="q-plus cr-p" (click)="denominationPlus(denominationPrice * 100)" title="">+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gift-body_right">
+                        <h3>{{ 'Gift.Who' | translate }}</h3>
+                        <div class="fields-area">
+                            <div class="gift-info_body">
+                                <div class="checkbox-type1">
+                                    <label for="variant">
+                                        <input id="variant" name="variant" type="checkbox" (change)="onChange()">
+                                        <span class="label-l">{{ 'Gift.Gift' | translate }}</span>
+                                        <span class="checkmark"><span class="inner"></span></span>
+                                    </label>
+                                </div>
+                                <div class="gift-inputs">
+                                    <div class="input-line" *ngIf="gift">
+                                        <input autocomplete="off" type="text" formControlName="from" name="from" placeholder="{{ 'Gift.From' | translate }}" [(ngModel)]="info.from">
+                                    </div>
+                                    <div class="input-line" *ngIf="gift">
+                                        <input autocomplete="off" type="text" formControlName="to" name="to" placeholder="{{ 'Gift.When' | translate }}" [(ngModel)]="info.to">
+                                    </div>
+                                    <div class="input-line" *ngIf="gift">
+                                        <input autocomplete="off" type="text" formControlName="message" name="message" placeholder="{{ 'Gift.Message' | translate }}" [(ngModel)]="info.message">
+                                    </div>
+                                    <div class="input-line" *ngIf="gift">
+                                        <input autocomplete="off" type="email" formControlName="addressee_email" name="addressee_email" placeholder="{{ 'Gift.AddresseeEmail' | translate }}" [(ngModel)]="info.addressee_email" [ngClass]="{'is-invalid': !giftForm.valid}">
+                                    </div>
+                                    <div class="input-line last">
+                                        <input autocomplete="off" type="email" formControlName="email" name="email" placeholder="{{ (!gift ? 'Gift.Email' : 'Gift.GiverEmail') | translate }}" [(ngModel)]="info.email" [ngClass]="{'is-invalid': !giftForm.valid}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gift-how">
+                        <span href="#" class="gift-how_link cr-p" (click)="popup = true">{{ 'Gift.HowUse' | translate }}</span>
+                    </div>
+                    <div class="gift-submit">
+                        <button type="submit" class="button b-button">
+                            {{ 'Gift.Buy' | translate }}
+                            <span *ngIf="certificateNumber || denominationNumber">
+                                {{ certificateNumber + denominationNumber }}
+                                {{ certificateNumber + denominationNumber | numerative: ['All.Certificate1' | translate, 'All.Certificate2' | translate, 'All.Certificate3' | translate] }}
+                                {{ 'Gift.On' | translate }} <span *ngIf="denominationNumber">{{ certificatePrice + denominationPrice * denominationNumber * 100 | money }}</span><span *ngIf="!denominationNumber">{{ certificatePrice | money }}</span> р
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

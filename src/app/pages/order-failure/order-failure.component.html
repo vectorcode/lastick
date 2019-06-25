@@ -1,0 +1,36 @@
+<app-header type="order"></app-header>
+
+<section class="lastick-widget-main">
+  <div class="lastick-widget-main_inner">
+    <div class="index_entrance final_screen-cert sm">
+      <header class="index_entrance-header">
+        <div class="failure-title">
+          <div class="lastick-logo">
+            Lastick
+          </div>
+        </div>
+      </header>
+      <div *ngIf="order">
+        <article class="index_entrance-article failure">
+          <h1>{{ 'OrderFail.Title' | translate }}</h1>
+          <div class="order-number failure">
+            <div class="failure-cross"></div>
+          </div>
+        </article>
+        <article class="final_screen-info">
+          <p class="failure-number">{{ 'OrderFail.Code' | translate }}: {{ order.code }}</p>
+          <p class="white">{{ 'OrderFail.Mercy' | translate }}</p>
+          <div class="failure-contacts">
+            <div class="item">+7 495 120-42-14</div>
+            <div class="item last">support@lastick.ru</div>
+          </div>
+        </article>
+      </div>
+      <div class="final_screen-button">
+        <a routerLink="" class="button b-button w-100">{{ 'OrderFail.Back' | translate }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

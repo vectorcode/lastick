@@ -1,0 +1,90 @@
+.page2 {
+  padding: 0!important;
+}
+
+
+.lastick-widget-main_bg {
+
+  & > .lastick-widget-main_inner {
+    padding-bottom: 50px;
+  }
+}
+
+.tab-desc {
+  padding: 24px 30px 26px 20px;
+  background: #2b2b2b;
+  border-radius: 4px;
+  color: rgba(255,255,255,.8);
+
+  &__head {
+    padding-bottom: 28px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.18);
+
+    &-row {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &-title {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.14;
+  }
+
+  &__body {
+
+    &-row {
+      display: flex;
+      margin-bottom: 18px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &-item {
+      width: 190px;
+
+      &:last-child {
+        width: 70%;
+      }
+    }
+
+    &-th {
+      padding-right: 15px;
+      font-size: 14px;
+      line-height: 1;
+    }
+  }
+}
+
+@media all and (max-width: 900px){
+  .tab-desc {
+
+    &__body {
+
+      &-row {
+        display: block;
+      }
+
+      &-item {
+
+        &:first-child {
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+}

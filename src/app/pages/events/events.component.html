@@ -1,0 +1,274 @@
+<!-- Header -->
+<app-header
+  [title]="(listEvents && listEvents.length > 0) ? (listEvents[0].NearestSchedule.Spot.short_name | multilang) : ''"
+  [nameEvent]="'All.Events' | translate"
+  [dateEvent]="(listEvents && listEvents.length) ? (listEvents[0].NearestSchedule.Hall.short_name | multilang) : ''"
+  (selectFilter)="selectFilter($event)" (searchFilter)="searchFilter($event)"></app-header>
+
+<section class="lastick-widget-main" >
+  <div class="lastick-widget-main_inner"
+       infiniteScroll
+       (scrollEndEmitter)="infiniteScroll()"
+       [work]="infiniteScrollWork"
+       [destroy]="infiniteScrollDestroy">
+    <div class="events sm">
+      <div class="events-feed"  >
+        <div class="event-item"
+             [style.background-image]="event.NearestSchedule.Hall.media_info && event.NearestSchedule.Hall.media_info.length ? 'url('+event.NearestSchedule.Hall.media_info[0].path+')' :'url(assets/img/photo_default.jpg)'"
+             *ngFor="let event of listEvents; let i = index"
+             routerLink="{{event.NearestSchedule.has_geometry ? '/events/'+event.uuid+'/schedules' : '/events/'+event.uuid }}" (click)="openEvent(event)">
+
+          <div class="mask"></div>
+          <div class="info">
+            <h4 class="title">{{event.name | multilang}}</h4>
+            <span class="place">{{event.NearestSchedule.Hall.name | multilang}}</span><!--translate.currentLang-->
+            <!--<span class="place">{{event.NearestSchedule.Spot.short_name | multilang}}</span>&lt;!&ndash;translate.currentLang&ndash;&gt;-->
+            <span class="date">{{event.NearestSchedule.begin_time | mandatetime | lowercase}}</span>
+            <!--<div class="price">{{event.NearestSchedule.Hall.name | multilang}}</div>-->
+            <span class="price">от {{event.NearestSchedule.MinPrice ? event.NearestSchedule.MinPrice.amount / 100 : '' }} р</span>
+          </div>
+        </div>
+        <!-- <div class="event-item" style="background-image: url('assets/img/balet.jpg')">
+          <div class="mask"></div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div class="event-item" style="background-image: url('assets/img/placido.jpg')">
+          <div class="mask"></div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+        <div class="event-item" style="background-image: url('assets/img/balet.jpg')">
+          <div class="mask"></div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div class="event-item" style="background-image: url('assets/img/placido.jpg')">
+          <div class="mask"></div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+        <div class="event-item" style="background-image: url('assets/img/balet.jpg')">
+          <div class="mask"></div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div class="event-item" style="background-image: url('assets/img/placido.jpg')">
+          <div class="mask"></div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!--
+
+<section class="lastick-widget-main" id="events-scroll-block" >
+  <div class="lastick-widget-main_inner" infiniteScroll (scrollEndEmitter)="infiniteScroll()" [work]="true">
+    <div class="events sm">
+      <div class="events-header">
+        <ul class="menu">
+          <li [class.active]="filters.all.active" (click)="activeFilter(filters.all.type)">Все</li>
+          <li [class.active]="filters.ballet.active" (click)="activeFilter(filters.ballet.type)">Балет</li>
+          <li [class.active]="filters.opera.active" (click)="activeFilter(filters.opera.type)">Опера</li>
+          <li [class.active]="filters.concerts.active" (click)="activeFilter(filters.concerts.type)">Концерты</li>
+        </ul>
+      </div>
+      <div class="events-feed" >
+
+        <div routerLink="{{event.NearestSchedule.has_geometry ? 'events/'+event.uuid+'/schedules' : '/events/'+event.uuid }}" class="event-item" *ngFor="let event of listEvents; let i = index">
+          <div class="picture">
+            <img src="assets/img/balet.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">{{event.name | multilang}}</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div routerLink="/events/567" class="event-item">
+          <div class="picture">
+            <img src="assets/img/balet.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div routerLink="/events/567/schedules" class="event-item">
+          <div class="picture">
+            <img src="assets/img/placido.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+        <div routerLink="/events/567/description" class="event-item">
+          <div class="picture">
+            <img src="assets/img/balet.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div routerLink="/events/343/schedules/343" class="event-item">
+          <div class="picture">
+            <img src="assets/img/placido.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/balet.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/placido.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/balet.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/placido.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/balet.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/placido.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/balet.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Спящая Красавица</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 450 р</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="picture">
+            <img src="assets/img/placido.jpg" alt="" />
+          </div>
+          <div class="info">
+            <h4 class="title">Пласидо Доминго на фестивале Звёзды&nbsp;Белых&nbsp;Ночей</h4>
+            <span class="place">Мариинский-2</span>
+            <span class="date">29 июня, пятница, 19:00</span>
+            <span class="price">от 850 р</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+-->
+
+<!-- Footer -->
+<app-footer></app-footer>
+
+
+<!--<a routerLink="/events/567" routerLinkActive="active">Страница расписания</a><br>-->
+
+<!--<a routerLink="/events/567/schedules" routerLinkActive="active">Активная вкладка расписания</a><br>-->
+
+<!--<a routerLink="/events/567/description" routerLinkActive="active">Активная вкладка описания мероприятия</a><br>-->

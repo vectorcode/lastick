@@ -1,0 +1,13 @@
+<!--<div class="lastick-widget-container container-sp1 " [ngClass]="{'bgimg-widget': bgImg}"-->
+     <!--[style.backgroundImage]="isSchedulesPage ? 'url('+global.bgImgSchedulesPage+')' : ''"-->
+     <!--[style.backgroundSize]="isSchedulesPage ? 'auto 300px' : ''"-->
+<!--&gt;-->
+<div class="lastick-widget-container container-sp1 " [ngClass]="{'bgimg-widget': bgImg}"
+         [style.backgroundImage]="isSchedulesPage ? 'url('+global.bgImgSchedulesPage+')' : ''"
+    >
+    <div class="lastick-widget-container_inner " [ngClass]="{'shadow1': !isSchedulesPage, 'shadow2': isSchedulesPage}">
+        <router-outlet></router-outlet>
+        <app-loader></app-loader>
+        <!--<app-blur></app-blur>-->
+    </div>
+</div>

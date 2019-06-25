@@ -1,0 +1,97 @@
+:host {
+  position: absolute;
+  left: 19px;
+  top: 0;
+  bottom: 0;
+  right: auto;
+  width: 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+:host > div {
+ display: flex;
+}
+
+:host > div:last-child {
+  flex: 1;
+}
+
+.control-button {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.31);
+  left: 0;
+  text-indent: -9999px;
+  background-color: #2e2e2e;
+  cursor: pointer;
+}
+.control-button:hover {
+  background-color: #383838;
+}
+
+.control-button.plus {
+  background-image: url("/assets/img/plus@2x.png");
+  background-size: 18px 17px;
+  top: 40%;
+}
+
+.control-button.minus {
+  background-image: url("/assets/img/minus@2x.png");
+  background-size: 18px 2px;
+  top: 55%;
+}
+
+.zoom-block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-block .control-button {
+  margin-bottom: 20px;
+}
+
+.control-button.info {
+  background-image: url("/assets/img/legend@2x.png");
+  background-size: 9px 15px;
+}
+
+
+
+@media screen and (max-width: 650px) {
+  :host {
+    left: auto;
+    right: 10px;
+    width: 48px;
+  }
+
+  .control-button {
+    width: 48px;
+    height: 48px;
+  }
+  .control-button.plus {
+    top: 20%
+  }
+  .control-button.minus {
+    top: 30%;
+  }
+  .control-button.info {
+    top: 50%;
+  }
+
+  :host > div:last-child {
+    flex: 0;
+    padding-bottom: 130px;
+  }
+
+}
+
+
+

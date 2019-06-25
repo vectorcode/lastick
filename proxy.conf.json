@@ -1,0 +1,21 @@
+[
+  {
+    "context": [
+      "!assets/**/*.*",
+      "**/*.jpg",
+      "**/*.jpeg",
+      "**/*.gif",
+      "**/*.png"
+    ],
+    "target": "https://widget.lastick.xd.unitix.cloud",
+    "changeOrigin": true,
+    "secure": false
+  },
+  {
+    "context": "/api",
+    "target": "https://widget.lastick.xd.unitix.cloud",
+    "changeOrigin": true,
+    "proxyTimeout": 10000,
+    "secure": false
+  }
+]

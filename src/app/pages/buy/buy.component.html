@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<section class="lastick-widget-main">
+    <div class="lastick-widget-main_inner">
+        <div class="index_entrance sm">
+
+            <header class="index_entrance-header">
+                <div class="logo"></div>
+            </header>
+
+            <article class="index_entrance-article">
+                <h1>{{ 'Buy.Title' | translate }}</h1>
+                <p>{{ 'Buy.Description' | translate }}</p>
+            </article>
+
+            <div class="index_entrance-buttons">
+                <a routerLink="gift" class="button b-button">{{ 'Buy.Buy' | translate }}</a>
+                <a routerLink="gift/activate" class="button b-button">{{ 'Buy.Activate' | translate }}</a>
+                <!--<a routerLink="events" class="button b-button" *ngIf="cart.certificate">{{ 'GiftActivated.BtnTxt' | translate }}</a>-->
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

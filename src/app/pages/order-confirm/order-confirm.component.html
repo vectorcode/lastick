@@ -1,0 +1,114 @@
+<div class="popup-container" [ngClass]="{'active': popup}">
+    <div class="popup">
+        <span (click)="popup = !popup" class="popup-closebutton cr-p" title="{{'Popup.Close' | translate}}">x</span>
+        <header class="popup-header">
+            <h3>{{'Popup.Title' | translate}}</h3>
+        </header>
+        <article class="popup-article">
+            {{'Popup.Text' | translate}}
+        </article>
+    </div>
+</div>
+
+<div class="promo-area" [ngClass]="{'active': promo}">
+    <div class="promo">
+        <div class="input-line">
+            <input type="text" class="" [(ngModel)]="info.promo" placeholder="{{ 'Confirm.Promo' | translate }}" />
+        </div>
+        <div class="buttons">
+            <span (click)="promo = !promo" class="left cr-p">{{ 'Confirm.Cancel' | translate }}</span>
+            <span (click)="promo = !promo" class="right cr-p">{{ 'Confirm.Save' | translate }}</span>
+        </div>
+    </div>
+</div>
+
+<app-header [nameEvent]="'Confirm.Title' | translate" (popupOpen)="popupOpen()"></app-header>
+
+<section class="lastick-widget-main">
+    <div class="lastick-widget-main_inner">
+        <div class="summary sm">
+            <section class="summary-area">
+                <div class="summary-area_inner">
+                    <header>
+                        <h1>{{ 'Gift.H1' | translate }}</h1>
+                        <p>{{ name[currentLang] }}</p>
+                    </header>
+                    <article>
+                        <h3>{{ 'Confirm.Tickets' | translate }}</h3>
+                        <div class="cert-content">
+                            <div class="cert-content-line" *ngFor="let price of pricesArray">
+                                <div class="cert-content-line_left">
+                                    {{ 'Confirm.SertificateOn' | translate }} {{ price / 100 }} р <span class="quantity">x {{ prices[price] }}</span>
+                                </div>
+                                <div class="cert-content-line_right">
+                                    {{ price * prices[price] / 100 }} р
+                                </div>
+                            </div>
+                            <div class="cert-content-line" *ngFor="let offer of specOffersTemplate">
+                                <div class="cert-content-line_left">
+                                    {{ offer.name[currentLang] }} {{ 'Confirm.On' | translate }} {{ offer.price }} р <span class="quantity">x {{ offer.count }}</span>
+                                </div>
+                                <div class="cert-content-line_right">
+                                    {{ offer.price * offer.count }} р
+                                </div>
+                            </div>
+                            <!--<div class="cert-content-line">-->
+                                <!--<div class="cert-content-line_left">-->
+                                    <!--{{ 'Confirm.Service' | translate }}-->
+                                <!--</div>-->
+                                <!--<div class="cert-content-line_right">-->
+                                    <!--{{ serviceMoney }} р-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="cert-content-line last">
+                                <div class="cert-content-line_left">
+                                    {{ 'Confirm.Total' | translate }}
+                                </div>
+                                <div class="cert-content-line_right">
+                                    {{ priceTotal / 100 }} р
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <aside class="summary-info">
+                <form [formGroup]="orderForm">
+                    <div class="userinfo">
+                        <h3>{{ 'Confirm.Contacts' | translate }}</h3>
+                        <div class="input-line">
+                            <input autocomplete="off" type="text" required [(ngModel)]="info.email" [ngClass]="{'is-invalid': !orderForm.valid}" formControlName="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="input-line">
+                            <input autocomplete="off" type="text" required [(ngModel)]="info.phone" [ngClass]="{'is-invalid': !orderForm.valid}" formControlName="phone" name="phone" placeholder="{{ 'Confirm.Phone' | translate }}">
+                        </div>
+                    </div>
+                    <div class="paytype">
+                        <h3>{{ 'Confirm.Payments' | translate }}</h3>
+                        <div class="paytypes">
+                            <div class="item" *ngFor="let payment of payments">
+                                <label for="`paytype{{i}}`">
+                                    <input type="radio" name="paytype" id="`paytype{{i}}`" value="{{ payment.name[currentLang] }}" checked />
+                                    <span class="checkmark"><span class="inner"></span></span>
+                                    <div class="label">
+                                        <p class="title">{{ payment.name | multilang }}</p>
+                                        <!-- <p class="info">Visa, Visa Electron, Maestro</p> -->
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="total">
+                        <!--<span class="promo psevdoLink cr-p" title="{{'Confirm.WritePromo' | translate}}" (click)="promo = !promo">{{ 'Confirm.HavePromo' | translate }}</span>-->
+                        <button class="button b-button" (click)="buy()">{{ 'Confirm.Buy' | translate }} {{ priceTotal / 100 }} р</button>
+                        <!--<button class="button b-button apple-pay">{{ 'Confirm.Buy' | translate }}</button>-->
+                        <p>{{'Confirm.Condition' | translate}}</p>
+                    </div>
+                </form>
+            </aside>
+        </div>
+    </div>
+</section>
+
+
+<app-footer></app-footer>

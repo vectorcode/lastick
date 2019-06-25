@@ -1,0 +1,117 @@
+<!-- Header -->
+<app-header [title]="eDt.short_name | multilang"></app-header>
+
+
+<section class="lastick-widget-main lastick-widget-main_bg">
+  <div class="head-bg"
+       [style.background-image]="(media_info && media_info[1]) || eDt.poster ? 'url(' + (eDt.poster ? eDt.poster.path : media_info[1].path) + ')' : false"></div>
+  <div class="lastick-widget-main_inner" *ngIf="eDt">
+    <div class="event-tickets event-descr sm">
+      <header class="event-tickets-header">
+        <h1 class="title">{{eDt.name | multilang}}</h1>
+        <div class="description" [innerHtml]="eDt.short_description | multilang"></div>
+        <!--<p class="description">Трехчасовой концерт музыки с повторяющейся структурой в исполнении музыкантов Московской консерватории</p>-->
+        <div class="details">
+          <span class="age">{{eDt.pg_rating}}</span>
+          <span class="type" *ngIf="eDt.NearestSchedule">
+            <span>{{eDt.NearestSchedule.Hall.name | multilang}} </span><!--let item of eDt.Tags-->
+          </span>
+          <span class="duration">{{eDt.duration | duration}}</span>
+        </div>
+      </header>
+      <section class="event-tickets-section">
+        <nav>
+          <ul class="menu">
+            <li [class.active]="viewSchedules">
+              <a (click)="viewSchedules = !viewSchedules" *ngIf="desc">{{'EventTickets.Tab1' | translate }}</a>
+              <a *ngIf="!desc">{{'EventTickets.Tab1' | translate }}</a>
+            </li>
+            <li [class.active]="!viewSchedules" *ngIf="desc"><a (click)="viewSchedules = !viewSchedules">{{'EventTickets.Tab2' | translate }}</a></li>
+          </ul>
+        </nav>
+
+        <article class="page1" [class.active]="viewSchedules">
+          <div class="timetable">
+
+
+            <div class="timetable-item" [class.last]="halls.length === ++i" *ngFor="let item of halls; let i = index">
+              <div class="left fl">
+                <span class="time">{{item.begin_time | mandatetime}}</span>
+                <span class="place">{{item.Hall.name | multilang}}</span>
+              </div>
+              <div class="right fl desktop">
+                <a routerLink="/events/{{event_uuid}}/schedules/{{item.uuid}}" class="button" title="">{{'EventTickets.BtnTxt' | translate }}</a>
+                <span class="price" *ngIf="eDt.NearestSchedule">{{'EventTickets.Min' | translate }} {{eDt.NearestSchedule.MinPrice.amount | money}} р</span>
+              </div>
+              <div class="right fl mobile" *ngIf="eDt.NearestSchedule">
+                <a routerLink="/events/{{event_uuid}}/schedules/{{item.uuid}}"  class="ticket">{{'EventTickets.Min' | translate }} {{eDt.NearestSchedule.MinPrice.amount | money}} р</a>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <article class="page2" [class.active]="!viewSchedules" *ngIf="desc">
+          <div class="tab-desc">
+            <div class="tab-desc__head">
+              <div class="tab-desc__head-row">
+                <h3 class="tab-desc__head-title" [innerHtml]="eDt.short_description | multilang"></h3>
+              </div>
+              <div class="tab-desc__head-row">
+                <div class="tab-desc__inner-html" [innerHtml]="eDt.description | multilang"></div>
+              </div>
+            </div>
+            <div class="tab-desc__body">
+              <div class="tab-desc__body-row">
+                <div class="tab-desc__body-item">
+                  <div class="tab-desc__body-th">{{'EventTickets.Duration' | translate}}</div>
+                </div>
+                <div class="tab-desc__body-item">
+                  <div class="tab-desc__text">{{eDt.duration | duration}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<div class="pretext">-->
+            <!--<div class="white text-b1" [innerHtml]="eDt.name | multilang" *ngIf="eDt.name"></div><br>-->
+
+            <!--<div class="coal" [innerHtml]="eDt.short_description | multilang" *ngIf="eDt.short_description"> </div>-->
+
+
+          <!--</div>-->
+          <!--<div class="text">-->
+            <!--<table class="condenced desktop">-->
+              <!--<tr *ngIf="eDt.duration">-->
+                <!--<th width="23%;">Продолжительность</th><td width="77%;">{{eDt.duration | duration}}</td>-->
+              <!--</tr>-->
+              <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>В программе</th><td>«Красавица и Чудовище», «Падение дома Ашеров», «Можжевеловое дерево», «Идеальный американец»</td>&ndash;&gt;-->
+              <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+            <!--</table>-->
+            <!--<table class="condenced mobile">-->
+              <!--<tr *ngIf="eDt.duration">-->
+                <!--<th width="23%;">&lt;!&ndash;Музыканты&ndash;&gt;</th><td width="77%;">{{eDt.duration | duration}}</td>-->
+              <!--</tr>-->
+              <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>&lt;!&ndash;Музыканты&ndash;&gt;</th>&ndash;&gt;-->
+              <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+              <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;<td>Нет текста</td>&ndash;&gt;-->
+              <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+              <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>В программе</th>&ndash;&gt;-->
+              <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+              <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;<td>«Красавица и Чудовище», «Падение дома Ашеров», «Можжевеловое дерево», «Идеальный американец»</td>&ndash;&gt;-->
+              <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+            <!--</table>-->
+          <!--</div>-->
+        </article>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<app-footer></app-footer>

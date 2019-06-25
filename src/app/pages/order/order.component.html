@@ -1,0 +1,248 @@
+<app-header type="order"></app-header>
+
+<section class="lastick-widget-main">
+  <div class="lastick-widget-main_inner">
+    <div class="index_entrance final_screen-cert sm" #wrap>
+
+      <header class="index_entrance-header">
+        <div class="logo logo_lastick"></div>
+      </header>
+
+      <div *ngIf="isValidStatus()">
+        <div *ngIf="!checkSuccess()">
+          <article class="index_entrance-article failure">
+            <h1>{{ 'OrderFail.Title' | translate }}</h1>
+            <div class="order-number failure">
+              <div class="failure-cross"></div>
+            </div>
+          </article>
+          <article class="final_screen-info">
+            <p class="failure-number" *ngIf="data">{{ 'OrderFail.Code' | translate }}: {{ data.code }}</p>
+            <p class="white">{{ 'OrderFail.Mercy' | translate }}</p>
+            <div class="failure-contacts">
+              <div class="item">+7 495 120-42-14</div>
+              <div class="item last">support@lastick.ru</div>
+            </div>
+          </article>
+        </div>
+
+        <div *ngIf="checkSuccess()">
+          <h1 *ngIf="items && items.length === 1" class="title title_nw">{{ 'Success.Write' | translate }}</h1>
+          <h1 *ngIf="items && items.length > 1" class="title title_nw">
+            {{ 'Success.Written' | translate }}
+            {{ items.length }}
+            {{ items.length | numerative: ['All.Certificate1' | translate, 'All.Certificate2' | translate,
+            'All.Certificate3' | translate] }}
+          </h1>
+          <article *ngIf="items && items.length" class="index_entrance-article"
+                   [ngClass]="{ 'success-article': items.length > 1 }">
+              <div class="o-feed" *ngIf="items.length === 1">
+                <div class="o-feed__item">
+                  <div class="o-feed__cart">
+                    <div class="o-feed__cart-body">
+                      <div class="o-feed__cart-row">
+                        <div class="o-feed__title">№{{ items[0].number }}</div>
+                        <div class="o-feed__text">{{ items[0].name | multilang }}</div>
+                      </div>
+                      <div class="o-feed__cart-row">
+                        <div class="o-feed__table">
+                          <div class="o-feed__table-item" *ngIf="items[0].amount">
+                            <div class="o-feed__table-title">{{ 'Success.Nominal' | translate }}</div>
+                            <div class="o-feed__table-value">{{ items[0].amount | money}} р</div>
+                          </div>
+                          <div class="o-feed__table-item" *ngIf="items[0].activation_range">
+                            <div class="o-feed__table-title">{{ 'Success.ValidUntil' | translate }}</div>
+                            <div class="o-feed__table-value">
+                              {{ items[0].activation_range.slice(items[0].activation_range.indexOf(',')
+                              + 2, -2) | date:'dd.MM.yyyy' }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="certificate-info">-->
+                <!--<span class="number">№{{ items[0].number }}</span>-->
+                <!--<span class="info">{{ items[0].name | multilang }}</span>-->
+              <!--</div>-->
+              <!--<div class="certificate-details">-->
+                <!--<div class="detail-item detail1" *ngIf="items[0].amount">-->
+                  <!--<div class="title">{{ 'Success.Nominal' | translate }}</div>-->
+                  <!--<div class="value">{{ items[0].amount | money }} р</div>-->
+                <!--</div>-->
+                <!--<div class="detail-item detail2" *ngIf="items[0].activation_range">-->
+                  <!--<div class="title">{{ 'Success.ValidUntil' | translate }}</div>-->
+                  <!--<div class="value">{{ items[0].activation_range.slice(items[0].activation_range.indexOf(',') + 2, -2)-->
+                    <!--| date:'dd.MM.yyyy' }}-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+
+            <div class="o-feed" *ngIf="items.length > 1">
+              <div class="o-feed__inner">
+                <drag-scroll [scrollbar-hidden]="true" [snap-disabled]="true"
+                             [style.width]="dragScrollWidth+'px'"
+                             class="drag-scroll">
+                  <div class="o-feed__item" drag-scroll-item *ngFor="let certificate of items">
+                    <div class="o-feed__cart">
+                      <div class="o-feed__cart-body">
+                        <div class="o-feed__cart-row">
+                          <div class="o-feed__title">№{{ certificate.number }}</div>
+                          <div class="o-feed__text">{{ certificate.name | multilang }}</div>
+                        </div>
+                        <div class="o-feed__cart-row">
+                          <div class="o-feed__table">
+                            <div class="o-feed__table-item" *ngIf="certificate.amount">
+                              <div class="o-feed__table-title">{{ 'Success.Nominal' | translate }}</div>
+                              <div class="o-feed__table-value">{{ certificate.amount | money}} р</div>
+                            </div>
+                            <div class="o-feed__table-item" *ngIf="certificate.activation_range">
+                              <div class="o-feed__table-title">{{ 'Success.ValidUntil' | translate }}</div>
+                              <div class="o-feed__table-value">
+                                {{ certificate.activation_range.slice(certificate.activation_range.indexOf(',')
+                                + 2, -2) | date:'dd.MM.yyyy' }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--<div class="certificate-info">-->
+                    <!--<span class="number">№{{ certificate.number }}</span>-->
+                    <!--<span class="info">{{ certificate.name | multilang }}</span>-->
+                    <!--</div>-->
+                    <!--<div class="certificate-details">-->
+                    <!--<div class="detail-item detail1" *ngIf="certificate.amount">-->
+                    <!--<div class="title">{{ 'Success.Nominal' | translate }}</div>-->
+                    <!--<div class="value">{{ certificate.amount | money}} р</div>-->
+                    <!--</div>-->
+                    <!--<div class="detail-item detail2" *ngIf="certificate.activation_range">-->
+                    <!--<div class="title">{{ 'Success.ValidUntil' | translate }}</div>-->
+                    <!--<div class="value">{{ certificate.activation_range.slice(certificate.activation_range.indexOf(',')-->
+                    <!--+ 2, -2) | date:'dd.MM.yyyy' }}-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                  </div>
+                </drag-scroll>
+              </div>
+            </div>
+          </article>
+
+          <article *ngIf="!items.length" class="index_entrance-article">
+            <h1>{{ 'Success.Thx' | translate }}<br>{{ 'Success.ThxText' | translate }}</h1>
+            <div class="order-number">
+              <h4>{{ 'Success.Code' | translate }}</h4>
+              <span class="number">{{ data.code }}</span>
+            </div>
+          </article>
+
+          <article class="final_screen-info">
+            <p class="white">
+              {{ 'Success.Info' | translate }}
+            </p>
+            <!--<p class="coal">-->
+              <!--{{ 'Success.Independently' | translate }} <a href="#" title="">{{ 'Success.Cancel' | translate }}</a>-->
+            <!--</p>-->
+          </article>
+        </div>
+      </div>
+
+
+      <div class="final_screen-button">
+        <a routerLink="" class="button b-button w-100">{{ 'Success.Back' | translate }}</a>
+      </div>
+
+    </div>
+  </div>
+  <app-footer></app-footer>
+</section>
+
+<!--<section class="lastick-widget-main">-->
+<!--<div class="lastick-widget-main_inner">-->
+<!--<div class="index_entrance final_screen-cert sm">-->
+
+<!--<header *ngIf="items.length" class="index_entrance-header">-->
+<!--<div class="logo"></div>-->
+<!--</header>-->
+
+<!--<header *ngIf="!items.length" class="index_entrance-header">-->
+<!--<div class="failure-title">-->
+<!--<div class="lastick-logo">-->
+<!--Lastick-->
+<!--</div>-->
+<!--</div>-->
+<!--</header>-->
+
+<!--<article *ngIf="items.length" class="index_entrance-article" [ngClass]="{ 'success-article': items.length > 1 }">-->
+<!--<h1 *ngIf="items.length === 1">{{ 'Success.Write' | translate }}</h1>-->
+<!--<h1 *ngIf="items.length > 1">-->
+<!--{{ 'Success.Written' | translate }}-->
+<!--{{ items.length }}-->
+<!--{{ items.length | numerative: ['All.Certificate1' | translate, 'All.Certificate2' | translate, 'All.Certificate3' | translate] }}-->
+<!--</h1>-->
+<!--<div class="index_entrance-certificate activated" *ngIf="items.length === 1">-->
+<!--<div class="certificate-info">-->
+<!--<span class="number">№{{ items[0].number }}</span>-->
+<!--<span class="info">{{ items[0].name[currentLang] }}</span>-->
+<!--</div>-->
+<!--<div class="certificate-details">-->
+<!--<div class="detail-item detail1" *ngIf="items[0].amount">-->
+<!--<div class="title">{{ 'Success.Nominal' | translate }}</div>-->
+<!--<div class="value">{{ items[0].amount }} р</div>-->
+<!--</div>-->
+<!--<div class="detail-item detail2" *ngIf="items[0].activation_range">-->
+<!--<div class="title">{{ 'Success.ValidUntil' | translate }}</div>-->
+<!--<div class="value">{{ items[0].activation_range.slice(items[0].activation_range.indexOf(',') + 2, -2) | date:'dd.MM.yyyy' }}</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="cert-feed" *ngIf="items.length > 1">-->
+<!--<div class="cert-feed_inner">-->
+<!--<div class="index_entrance-certificate activated" *ngFor="let certificate of items">-->
+<!--<div class="certificate-info">-->
+<!--<span class="number">№{{ certificate.number }}</span>-->
+<!--<span class="info">{{ certificate.name[currentLang] }}</span>-->
+<!--</div>-->
+<!--<div class="certificate-details">-->
+<!--<div class="detail-item detail1" *ngIf="certificate.amount">-->
+<!--<div class="title">{{ 'Success.Nominal' | translate }}</div>-->
+<!--<div class="value">{{ certificate.amount / 100}} р</div>-->
+<!--</div>-->
+<!--<div class="detail-item detail2" *ngIf="certificate.activation_range">-->
+<!--<div class="title">{{ 'Success.ValidUntil' | translate }}</div>-->
+<!--<div class="value">{{ certificate.activation_range.slice(certificate.activation_range.indexOf(',') + 2, -2) | date:'dd.MM.yyyy' }}</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</article>-->
+
+<!--<article *ngIf="!items.length" class="index_entrance-article">-->
+<!--<h1>{{ 'Success.Thx' | translate }}<br>{{ 'Success.ThxText' | translate }}</h1>-->
+<!--<div class="order-number">-->
+<!--<h4>{{ 'Success.Code' | translate }}</h4>-->
+<!--<span class="number">{{ order.order_uuid }}</span>-->
+<!--</div>-->
+<!--</article>-->
+
+<!--<article class="final_screen-info">-->
+<!--<p class="white">-->
+<!--{{ 'Success.Info' | translate }}-->
+<!--</p>-->
+<!--<p class="coal">-->
+<!--{{ 'Success.Independently' | translate }} <a href="#" title="">{{ 'Success.Cancel' | translate }}</a>-->
+<!--</p>-->
+<!--</article>-->
+
+<!--<div class="final_screen-button">-->
+<!--<a routerLink="" class="button b-button w-100">{{ 'Success.Back' | translate }}</a>-->
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
+

@@ -1,0 +1,85 @@
+<button (click)="getOne()">Method 1</button><br>
+<button (click)="getToo()">Method 2</button><br>
+<button (click)="showPopup()">InfoPopup</button><br>
+<button (click)="showPopupError()">InfoPopupError</button><br>
+<button (click)="showPopupSuccese()">InfoPopupSuccess</button><br>
+
+import { TransportService } from '../../services/transport.service';
+import { GlobalService} from '../../services/global.service';
+
+constructor(private transport: TransportService, private global: GlobalService) {}
+
+getOne() {
+    this.global.showHideLoader.next(true);
+    this.transport.method1Call().subscribe(
+        success => {
+            console.log('Successfully Completed');
+            console.log(success);
+            this.global.showHideLoader.next(false);
+        },
+        error => {
+           console.log(error);
+           this.global.showHideLoader.next(false);
+        }
+    );
+}
+
+getToo() {
+  this.global.showHideLoader.next(true);
+  this.transport.method2Call().subscribe(
+        success => {
+            console.log('Successfully Completed');
+            console.log(success);
+            this.global.showHideLoader.next(false);
+        },
+        error => {
+           console.log(error);
+           this.global.showHideLoader.next(false);
+        }
+    );
+}
+
+showPopup() {
+this.global.showHideInfoPopup.next({
+  type: '',
+  msg: 'Информационное сообщение',
+  timer: 3000
+});
+}
+
+showPopupError() {
+this.global.showHideInfoPopup.next({
+  type: 'error',
+  msg: 'Негативное сообщение',
+  timer: 3000
+});
+}
+
+showPopupSuccese() {
+this.global.showHideInfoPopup.next({
+  type: 'succes',
+  msg: 'Позитивное сообщение',
+  timer: 3000
+});
+}
+
+
+
+/***********************
+ ******PAGE BUY**********
+ ***********************/
+method1Call(): Observable<any> {
+    return this.httpClient.get('https://jsonplaceholder.typicode.com/users');
+}
+
+method2Call(): Observable<any> {
+    return this.httpClient.get('https://jsonplaceholder.typicode.com/user12');
+}
+
+/********END************
+ ******PAGE BUY**********
+ ***********************/
+
+<a routerLink="/events" routerLinkActive="active">Страница событий</a><br>
+<a routerLink="/order/confirm" routerLinkActive="active">Подтверждение заказа</a><br>
+<a routerLink="/order/231" routerLinkActive="active">Статус заказа</a><br>

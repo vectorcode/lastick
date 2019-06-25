@@ -1,0 +1,136 @@
+<!-- Header -->
+<app-header></app-header>
+
+<section class="lastick-widget-main">
+  <div class="lastick-widget-main_inner">
+    <div class="entrance-tickets sm">
+      <header class="entrance-tickets-header">
+        <div class="label">{{'EntranceTickets.ChooseTxt' | translate }} {{eDt.NearestSchedule.Spot.work_hours | modeofoperation}}</div>
+        <div class="date_time">
+          <div class="date">
+            <span class="date-item pnt" [class.active]="dayEvent.today.active" (click)="activeDay('today')" >{{'EntranceTickets.Tooday' | translate }}</span>
+            <span class="date-item pnt" [class.active]="dayEvent.tomorrow.active" (click)="activeDay('tomorrow')">{{'EntranceTickets.Tomorrow' | translate }}</span>
+            <span class="date-item calendar-link pnt " [class.active]="dayEvent.calendar.active" (click)="activeDay('calendar')" >{{'EntranceTickets.AnotherDay' | translate }} <input type='text' class="datepickerHere"/></span>
+
+          </div>
+          <div class="time">
+            <div class="select-container" *ngIf="selectOpt.length">
+              <select class="nice-select" *ngFor="let item of selectOpt;">
+                <!--<option selected="selected">12:00&mdash;14:00</option>-->
+                <option value="{{item}}">{{item}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="entrance-tickets-items">
+        <h3>{{'EntranceTickets.Tickets' | translate }}</h3>
+        <div class="items-container">
+          <div class="item" *ngFor="let item of aTickets.tickets;">
+            <div class="title">
+              <h4>{{aTickets.prices[item.price_values[0]].PriceCategory.name | multilang}}</h4>
+              <span class="hint" *ngIf="aTickets.prices[item.price_values[0]].PriceCategory.description">{{aTickets.prices[item.price_values[0]].PriceCategory.description | multilang}}</span>
+              <span class="price">{{aTickets.prices[item.price_values[0]].amount | money}} р</span>
+            </div>
+            <div class="total">
+              <div class="quantity q-32">
+                <span class="q-minus" (click)="dellTicket(item)">-</span>
+                <span class="result">{{cartView[item.uuid] !== undefined? cartView[item.uuid].count : 0}}</span>
+                <span class="q-plus" (click)="addTicket(item)">+</span>
+              </div>
+            </div>
+          </div>
+          <!--<div class="item">-->
+            <!--<div class="title">-->
+              <!--<h4>Семейный</h4>-->
+              <!--<span class="hint">2 ребенка + 2 взрослых</span>-->
+              <!--<span class="price">1 750 р</span>-->
+            <!--</div>-->
+            <!--<div class="total">-->
+              <!--<div class="quantity q-32">-->
+                <!--<a href="#" class="q-minus" title="">-</a>-->
+                <!--<span class="result">2</span>-->
+                <!--<a href="#" class="q-plus" title="">+</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="item">-->
+            <!--<div class="title">-->
+              <!--<h4>Детский билет </h4>-->
+              <!--<span class="hint">С удостоверением личности</span>-->
+              <!--<span class="price">450 р</span>-->
+            <!--</div>-->
+            <!--<div class="total">-->
+              <!--<div class="quantity q-32">-->
+                <!--<a href="#" class="q-minus" title="">-</a>-->
+                <!--<span class="result">2</span>-->
+                <!--<a href="#" class="q-plus" title="">+</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="item">-->
+            <!--<div class="title">-->
+              <!--<h4>VIP билет</h4>-->
+              <!--<span class="hint">2 ребенка + 2 взрослых</span>-->
+              <!--<span class="price">1 750 р</span>-->
+            <!--</div>-->
+            <!--<div class="total">-->
+              <!--<div class="quantity q-32">-->
+                <!--<a href="#" class="q-minus" title="">-</a>-->
+                <!--<span class="result">2</span>-->
+                <!--<a href="#" class="q-plus" title="">+</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </section>
+      <!--<section class="entrance-tickets-adds">-->
+        <!--<h3>Дополнительные услуги</h3>-->
+        <!--<div class="summary-special">-->
+          <!--<div class="summary-special_inner">-->
+            <!--<div class="item" style="background-image:url('assets/img/binoculars@2x.png');background-size: 70px 43px;">-->
+              <!--<a href="#" class="info-icon">i</a>-->
+              <!--<div class="title">Аренда бинокля</div>-->
+              <!--<div class="total">-->
+                <!--<div class="nominal">+300 р</div>-->
+                <!--<div class="quantity q-32">-->
+                  <!--<a href="#" class="q-minus" title="">-</a>-->
+                  <!--<span class="result">2</span>-->
+                  <!--<a href="#" class="q-plus" title="">+</a>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="item" style="background-image:url('assets/img/vip@2x.png');background-size: 55px 47px;">-->
+              <!--<a href="#" class="info-icon">i</a>-->
+              <!--<div class="title">VIP вход в зал</div>-->
+              <!--<div class="total">-->
+                <!--<div class="nominal">+300 р</div>-->
+                <!--<div class="quantity q-32">-->
+                  <!--<a href="#" class="q-minus" title="">-</a>-->
+                  <!--<span class="result">2</span>-->
+                  <!--<a href="#" class="q-plus" title="">+</a>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="item last" style="background-image:url('assets/img/moet@2x.png');background-size: 138px 49px;">-->
+              <!--<a href="#" class="info-icon">i</a>-->
+              <!--<div class="title">2 бокала Moet Chandon</div>-->
+              <!--<div class="total">-->
+                <!--<div class="nominal">+300 р</div>-->
+                <!--<div class="quantity q-32">-->
+                  <!--<a href="#" class="q-minus" title="">-</a>-->
+                  <!--<span class="result">2</span>-->
+                  <!--<a href="#" class="q-plus" title="">+</a>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</section>-->
+
+      <app-button-cart [cartTotalItems]="cartTotalItems" [cartTotalCost]="cartTotalCost"></app-button-cart>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<app-footer></app-footer>

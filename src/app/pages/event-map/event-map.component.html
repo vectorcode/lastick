@@ -1,0 +1,5 @@
+<app-header
+  [title]="global.currentEvent ? (global.currentEvent.short_name | multilang) : ''"
+  [sub_title]="global.currentEvent && global.currentEvent.NearestSchedule ? (global.currentEvent.NearestSchedule.begin_time | mandatetime) : ''"></app-header>
+<app-hall-schema-container [schedule]="schedule_uuid" [onSelect]="onSelectSubject"></app-hall-schema-container>
+

@@ -1,0 +1,41 @@
+.hint {
+  border-radius: 10px;
+  width: 350px;
+}
+
+.hint.error {
+  padding: 10px 15px;
+  text-align: center;
+  background-color: rgba(61, 177, 255, 0.74);
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.33);
+  opacity: 0.99;
+  position: relative;
+  z-index:100;
+}
+.error-area{
+  display: none;
+  position: absolute;
+  left: calc(50% - 175px);
+  top: calc(100% + 15px);
+}
+
+.error-area.show{
+  display: block;
+}
+.info-tpError .hint.error{
+  background-color: rgba(255, 53, 53, 0.74);
+}
+.info-tpSuccess .hint.error{
+  background: rgba(189, 255, 55, 0.74);
+}
+
+@media all and (max-width: 600px) {
+  .error-area {
+    left: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .hint {
+    width: 100%;
+  }
+}

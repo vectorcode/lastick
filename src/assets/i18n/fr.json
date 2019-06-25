@@ -1,0 +1,89 @@
+{
+  "Buy": {
+    "Title": "Chèque-cadeau",
+    "Description": "Entrez le numéro du certificat-cadeau pour voir les activités et les catégories de prix disponibles",
+    "Buy": "Acheter maintenant",
+    "Activate": "Activer"
+  },
+  "Gift": {
+    "H1": "Certificat cadeau",
+    "Count": "Nominal et quantité",
+    "Who": "Destinataire",
+    "Gift": "En cadeau",
+    "From": "De qui",
+    "When": "A",
+    "Message": "Votre message",
+    "Email": "Email pour la livraison",
+    "AddresseeEmail": "Addressee Email",
+    "GiverEmail": "Giver Email",
+    "Buy": "Payer maintenant",
+    "On": "sur le",
+    "Denomination": "Sa dénomination",
+    "HowUse": "Comment l'utiliser?"
+  },
+  "Confirm": {
+    "H1": "Certificat cadeau",
+    "Title": "Confirmation de commande",
+    "SertificateOn": "Certificat pour",
+    "On": "pour",
+    "Service": "Frais de service",
+    "Total": "Total pour paiement",
+    "WritePromo": "Entrez un code promotionnel",
+    "HavePromo": "J'ai un code promotionnel",
+    "Promo": "Code promotionnel",
+    "Phone": "Numéro de téléphone",
+    "Cancel": "Annuler",
+    "Save": "Appliquer",
+    "Buy": "Payer maintenant",
+    "Condition": "En cliquant sur le bouton 'Payer', j'accepte les conditions générales de traitement des données personnelles",,
+    "Tickets": "Billets",
+    "Offers": "Offres spéciales des partenaires",
+    "Contacts": "Informations de contact",
+    "Payments": "Modes de paiement"
+  },
+  "OrderFail": {
+    "Title": "Impossible de créer une commande",
+    "Code": "Code de commande",
+    "Mercy": "Désolé pour le dérangement. S'il vous plaît contacter le support avec votre numéro de commande",
+    "Back": "Retour au site"
+  },
+  "GiftActivate": {
+    "Title": "Activer le certificat",
+    "Description": "Entrez le numéro du certificat-cadeau pour voir les activités et les catégories de prix disponibles",
+    "Placeholder": "Numéro de certificat",
+    "Activate": "Activer"
+  },
+  "Success": {
+    "Write": "Certificat délivré!",
+    "Written": "Écrit",
+    "Nominal": "Nominal",
+    "ValidUntil": "Valable jusqu'à",
+    "Info": "Les informations de la commande ont été envoyées à votre adresse e-mail, vous recevrez également une notification par SMS",
+    "Independently": "Si nécessaire, vous pouvez indépendamment",
+    "Cancel": "annuler une commande",
+    "Back": "Retour sur le site",
+    "Thx": "Merci!",
+    "ThxText": "Votre commande a été payée avec succès",
+    "Code": "Code de commande"
+  },
+  "Header": {
+    "Use": "Comment l'utiliser?"
+  },
+  "Footer": {
+    "Term": "Accord d'utilisateur",
+    "Hour": "24 heures"
+  },
+  "Popup": {
+    "Title": "Comment utiliser le certificat?",
+    "Text": "The main goal of this book is to develop a complete metaphysical system based on the idea of Quality introduced in his first book. As in his previous book, the narrative is embedded between rounds of philosophical discussion. Unlike his previous book, in which he creates a dichotomy between Classical and Romantic Quality, this book centers on the division of Quality into the Static and the Dynamic. According to the novel, the known universe can be divided into four Static values: inorganic, biological, social, and intellectual. Everything in the known universe can be categorized into one of these four categories, except Dynamic Quality. Because Dynamic Quality is indefinable, the novel discusses the interactions between the four Static values and the Static values themselves.",
+    "Close": "Сlore"
+  },
+  "All": {
+    "Rub1": "rouble",
+    "Rub2": "rouble",
+    "Rub3": "roubles",
+    "Certificate1": "certificat",
+    "Certificate2": "certificat",
+    "Certificate3": "certificats"
+  }
+}

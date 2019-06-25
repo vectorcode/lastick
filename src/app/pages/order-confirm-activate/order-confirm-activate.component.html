@@ -1,0 +1,166 @@
+<app-header [title]="'Confirm.Title' | translate"></app-header>
+
+<section class="lastick-widget-main">
+  <div class="lastick-widget-main_inner" *ngIf="global.currentEvent">
+    <div class="summary sm">
+      <section class="summary-area">
+        <div class="summary-area_inner">
+          <header>
+            <h1>{{global.currentEvent.short_name | multilang}}</h1>
+            <p *ngIf="global.currentEvent.NearestSchedule">{{global.currentEvent.NearestSchedule.Hall.short_name | multilang}} {{global.currentEvent.NearestSchedule.begin_time | mandatetime}}</p>
+          </header>
+          <article>
+            <h3>{{'Confirm.Tickets' | translate }}</h3>
+            <div class="cert-content">
+              <div *ngIf="cartService.certificate">
+                <div class="cert-content-line">
+                  <div class="cert-content-line_left gold">
+                    {{'Confirm.Denomination' | translate }}
+                  </div>
+                  <div class="cert-content-line_right">
+                    {{ cartService.certificate.PriceModifier.value | money }} р
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="cartItems && cartItems.length">
+                <div>
+                  <div class="cert-content-line cur-p" *ngIf="collapse" (click)="toggleGroup()">
+                    <div class="cert-content-line_left">
+                      {{getPlaceName(cartItems.length - 1) | multilang}}, {{getPlaceRow(cartItems.length - 1)}} {{ 'HallSchema.ROW' | translate }}, {{ 'HallSchema.SEAT' | translate }} {{getPlaceSeats(cartItems.length - 1)}}
+                      <i class="icon-collapse"></i>
+                    </div>
+                  </div>
+                  <div *ngIf="!collapse">
+                    <div class="cert-content-line"  *ngFor="let ticket of cartItems">
+                      <div class="cert-content-line_left">
+                        {{ticket.ProductItem.Place.meta.sector && ticket.ProductItem.Place.meta.sector.name | multilang}}{{ticket.ProductItem.Place.meta.sector &&  ', '}}
+
+                        {{ticket.ProductItem.Place.meta.fragment && ticket.ProductItem.Place.meta.fragment.name | multilang }}{{ticket.ProductItem.Place.meta.fragment &&  ', '}}
+
+                        {{ 'HallSchema.ROW' | translate }}
+                        {{ticket.ProductItem.Place.meta.row && ticket.ProductItem.Place.meta.row.name | multilang }}{{ticket.ProductItem.Place.meta.fragment &&  ', '}}
+
+                        {{ 'HallSchema.SEAT' | translate }}
+                        {{ticket.ProductItem.Place.name && ticket.ProductItem.Place.name | multilang }}
+                      </div>
+                      <div class="cert-content-line_right">
+                        {{ticket.total_cost | money}} р
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cert-content-line cur-p last" *ngIf="!collapse && cartItems.length > 1" (click)="toggleGroup()">
+                    <div class="cert-content-line_left">
+                      <!--{{getPlaceName(cartItems.length - 1) | multilang}}, {{getPlaceRow(cartItems.length - 1)}} {{ 'HallSchema.ROW' | translate }}, {{ 'HallSchema.SEAT' | translate }} {{getPlaceSeats(cartItems.length - 1)}}-->
+                      <i class="icon-collapse" style="transform: rotateX(180deg)"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="cert-content-line" *ngIf="cartService.service_fee > 0">
+                  <div class="cert-content-line_left">
+                    {{'Confirm.Service' | translate }}
+                  </div>
+                  <div class="cert-content-line_right">
+                    {{ cartService.service_fee | money }} р
+                  </div>
+                </div>
+                <div class="cert-content-line last">
+                  <div class="cert-content-line_left">
+                    {{'Confirm.Total2' | translate }}
+                  </div>
+                  <div class="cert-content-line_right">
+                    {{ cartService.total_cost | money }} р
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!--<article>-->
+            <!--<h3>Специальные предложения от партнеров</h3>-->
+            <!--<div class="summary-special">-->
+              <!--<div class="summary-special_inner">-->
+                <!--<div class="item" style="background-image:url('assets/img/binoculars@2x.png');background-size: 70px 43px;">-->
+                  <!--<a href="#" class="info-icon">i</a>-->
+                  <!--<div class="title">Аренда бинокля</div>-->
+                  <!--<div class="total">-->
+                    <!--<div class="nominal">+300 р</div>-->
+                    <!--<div class="quantity q-32">-->
+                      <!--<a href="#" class="q-minus" title="">-</a>-->
+                      <!--<span class="result">2</span>-->
+                      <!--<a href="#" class="q-plus" title="">+</a>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="item" style="background-image:url('assets/img/vip@2x.png');background-size: 55px 47px;">-->
+                  <!--<a href="#" class="info-icon">i</a>-->
+                  <!--<div class="title">VIP вход в зал</div>-->
+                  <!--<div class="total">-->
+                    <!--<div class="nominal">+300 р</div>-->
+                    <!--<div class="quantity q-32">-->
+                      <!--<a href="#" class="q-minus" title="">-</a>-->
+                      <!--<span class="result">2</span>-->
+                      <!--<a href="#" class="q-plus" title="">+</a>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="item last" style="background-image:url('assets/img/moet@2x.png');background-size: 138px 49px;">-->
+                  <!--<a href="#" class="info-icon">i</a>-->
+                  <!--<div class="title">2 бокала Moet Chandon</div>-->
+                  <!--<div class="total">-->
+                    <!--<div class="nominal">+300 р</div>-->
+                    <!--<div class="quantity q-32">-->
+                      <!--<a href="#" class="q-minus" title="">-</a>-->
+                      <!--<span class="result">2</span>-->
+                      <!--<a href="#" class="q-plus" title="">+</a>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</article>-->
+        </div>
+      </section>
+      <app-confirm-popup
+        [id]="'order-confirm'"
+        (onSuccess)="checkout()"
+        (onCancel)="focusForm()"></app-confirm-popup>
+      <aside class="summary-info">
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+          <div class="userinfo">
+            <h3>{{'Confirm.Contacts' | translate }}</h3>
+            <div class="input-line">
+              <input type="email" placeholder="Email" formControlName="email" #emailInput/>
+            </div>
+            <div class="input-line">
+              <input type="text" placeholder="{{'Confirm.Phone' | translate }}" formControlName="phone" />
+            </div>
+          </div>
+          <div class="pay-m pay-m_summary" *ngIf="cartService.payment_methods && cartService.payment_methods.length > 0">
+            <h3 class="pay__title">{{lang.payment_methods.title | multilang}}</h3>
+            <label class="pay-m__row" *ngFor="let method of cartService.payment_methods; let i = index">
+              <div class="pay-m__col">
+                <input type="radio" class="pay-m__check"
+                       [checked]="(cartService.payment_method && cartService.payment_method.uuid === method.uuid)"
+                       [value]="method.uuid"
+                       (click)="cartService.setCartPaymentMethod({'payment_method': method.uuid})">
+                <div class="pay-m__check-fake"></div>
+              </div>
+              <div class="pay-m__col">
+                <h4 class="pay-m__meta-title">{{method.name | multilang}}</h4>
+                <div class="pay-m__meta-text">
+                  {{method.Promo.PriceModifier ? 'Скидка ' + method.Promo.PriceModifier.formatted_value : 'Visa, Visa Electron, Maestro'}}
+                </div>
+              </div>
+            </label>
+          </div>
+          <div class="total">
+            <button *ngIf="orderForm.valid" type="submit" class="button b-button">{{'Confirm.Done' | translate }}</button>
+            <button *ngIf="!orderForm.valid" type="button" class="button b-button disabled" (click)="focusAndTouchForm()">{{'Confirm.Done' | translate }}</button>
+            <p>{{'Confirm.Condition2' | translate }}</p>
+          </div>
+        </form>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

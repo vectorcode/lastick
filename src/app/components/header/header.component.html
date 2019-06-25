@@ -1,0 +1,146 @@
+<header class="header" #header [ngClass]="{
+    'transparent' : !fixed && (currentPage === 'index' || currentPage === 'giftActivate'  || currentPage === 'gift' || type === 'order'),
+    'transparent_mobile' : !fixed && (currentPage === 'index' || currentPage === 'gift' || type === 'order'),
+    'events-header-h' : currentPage === 'events',
+    'fixed': (currentPage !== 'index' && currentPage !== 'gift' && currentPage !== 'giftActivate') && fixed
+}">
+  <div class="header__row" [ngClass]="{'header__row_no-wrap': currentPage !== 'events'}">
+    <div class="header__item header__item_meta">
+      <div class="header__meta">
+        <div class="header__meta-item cur-p" (click)="back()"
+             *ngIf="historyLength > 1 && type !== 'order' && currentPage !== 'index'">
+          <div class="header__meta-icon header__meta-icon_back"></div>
+        </div>
+        <div class="header__meta-block">
+          <div class="header__meta-title" *ngIf="title">{{title}}</div>
+          <p class="header__meta-text" *ngIf="sub_title">{{sub_title}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="header__item header__item_nav" *ngIf="currentPage === 'events'">
+      <div class="header__nav-item header__nav-item_nav" *ngIf="currentPage === 'events' && !activeSearch">
+        <nav class="nav" #nav>
+            <drag-scroll
+              #dragScroll
+              class="drag-scroll"
+              style="user-select: none; cursor: pointer; overflow: hidden;"
+              [scrollbar-hidden]="true"
+              [snap-disabled]="true">
+              <!--<div class="nav__list">-->
+              <div drag-scroll-item class="nav__item" [class.active]="activeItem === 'all'"
+                   (click)="activeFilter('all')"
+                   *ngIf="global.settings.FilterTags">
+                <span class="nav__link">{{'All.All' | translate }}</span>
+              </div>
+              <div drag-scroll-item class="nav__item" *ngFor="let item of global.settings.FilterTags; let i = index"
+                   (click)="activeFilter(i)"
+                   [class.active]="activeItem === i">
+                <span class="nav__link">{{ item.name | multilang }}</span>
+              </div>
+              <!--</div>-->
+            </drag-scroll>
+        </nav>
+      </div>
+      <div class="header__nav-item header__nav-item_full-width" *ngIf="activeSearch">
+        <div class="searchblock">
+          <input type="text" name="search" class="searchfield" placeholder="Поиск" [(ngModel)]="searchText"
+                 (keyup)="updateSearch($event)" autofocus>
+          <span class="clear cur-p" (click)="viewSearch(false)">x</span>
+        </div>
+      </div>
+      <div class="header__nav-item" *ngIf="!activeSearch">
+        <div class="header__icon-search cur-p" (click)="viewSearch(true)"></div>
+      </div>
+    </div>
+    <div class="header__item">
+      <div class="header__item-row">
+        <div class="header__item-item desktop"
+             *ngIf="cart.certificate && currentPage !== 'index' && currentPage !== 'gift' && currentPage !== 'giftActivate' && currentPage !== 'orderConfirm'">
+          <div class="money-cert">
+            {{'All.HeaderValue' | translate }} {{ cart.certificate.PriceModifier.value | money}} р
+          </div>
+        </div>
+        <div class="header__item-item">
+          <div class="lastick-widget-lang fr translate-select"> <!--b-type-->
+            <app-translate></app-translate>
+          </div>
+        </div>
+        <div class="header__item-item">
+          <a href="/" class="header__icon-close"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="money-cert money-cert_mobile mobile"
+       *ngIf="cart.certificate && currentPage !== 'index' && currentPage !== 'gift' && currentPage !== 'giftActivate' && currentPage !== 'orderConfirm'">
+    {{'All.HeaderValue' | translate }} {{ cart.certificate.PriceModifier.value | money}} р
+  </div>
+
+  <app-info></app-info>
+
+  <!--<div class="lastick-widget-header_inner">-->
+  <!--<div class="lastick-widget-header_padded">-->
+
+  <!--<div class="lastick-widget-header_left fl w-60">-->
+  <!--<div class="lastick-widget-header_nav fl" *ngIf="type !== 'order'">-->
+  <!--<span (click)="back()" *ngIf="historyLength > 1" class="back-button cr-p"><</span>-->
+  <!--</div>-->
+  <!--<div class="lastick-widget-header_info1 fl" [ngClass]="{'single-line': !dateEvent}">-->
+  <!--<h3>{{ nameEvent }}</h3>-->
+  <!--<p class="header-text" *ngIf="!placeEvent">{{ dateEvent }}</p>-->
+  <!--<p class="header-text" *ngIf="placeEvent">{{ dateEvent | mandatetime}}, {{placeEvent}}</p>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="lastick-widget-header_right fr w-40">-->
+  <!--<div class="lastick-widget-header_close fr">-->
+  <!--<a href="#" class="close-button">x</a>-->
+  <!--</div>-->
+  <!--<div class="lastick-widget-lang fr translate-select"> &lt;!&ndash;b-type&ndash;&gt;-->
+  <!--<app-translate></app-translate>-->
+  <!--</div>-->
+  <!--<div class="lastick-widget-header_info2 fr b-type desktop"-->
+  <!--*ngIf="cart.certificate && currentPage !== 'index' && currentPage !== 'gift' && currentPage !== 'giftActivate' && currentPage !== 'orderConfirm'">-->
+  <!--<a class="header-how">{{'All.HeaderValue' | translate }} {{ cart.certificate.PriceModifier.value | money}}-->
+  <!--р</a>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="lastick-widget-header_center" *ngIf="currentPage === 'events' && !activeSearch">-->
+  <!--<div class="events-header type1">-->
+  <!--<div class="events-header__row">-->
+  <!--<div class="events-header__item">-->
+
+
+  <!--</div>-->
+  <!--<div class="events-header__item">-->
+  <!--<div class="events-header__search-btn search" (click)="viewSearch(true)"></div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--&lt;!&ndash;<ul class="menu">&ndash;&gt;-->
+  <!--&lt;!&ndash;<li [class.active]="activeItem === 'all'" (click)="activeFilter('all')" *ngIf="global.settings.FilterTags">&ndash;&gt;-->
+  <!--&lt;!&ndash;<a>{{'All.All' | translate }}</a>&ndash;&gt;-->
+  <!--&lt;!&ndash;</li>&ndash;&gt;-->
+  <!--&lt;!&ndash;<li [class.active]="activeItem === i" *ngFor="let item of global.settings.FilterTags; let i = index" (click)="activeFilter(i)" >&ndash;&gt;-->
+  <!--&lt;!&ndash;<a>{{ item.name | multilang }}</a>&ndash;&gt;-->
+  <!--&lt;!&ndash;</li>&ndash;&gt;-->
+  <!--&lt;!&ndash;<li class="search" (click)="viewSearch(true)">&ndash;&gt;-->
+  <!--&lt;!&ndash;<a>Поиск</a>&ndash;&gt;-->
+  <!--&lt;!&ndash;</li>&ndash;&gt;-->
+  <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="lastick-widget-header_center" *ngIf="currentPage === 'events' && activeSearch">-->
+  <!--<div class="searchblock">-->
+  <!--<input type="text" name="search" class="searchfield" placeholder="Поиск" [(ngModel)]="searchText"-->
+  <!--(keyup)="updateSearch($event)">-->
+  <!--<span class="clear" (click)="viewSearch(false)">x</span>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="lastick-widget-header_100">-->
+  <!--<div class="lastick-widget-header_line2 w-100 fl mobile"-->
+  <!--*ngIf="global.activeSertificate && currentPage !== 'index' && currentPage !== 'gift' && currentPage !== 'giftActivate' && currentPage !== 'orderConfirm'">-->
+  <!--<span class="header-how">{{'All.HeaderValue' | translate }} {{ global.activeSertificate.PriceModifier.value | money}} р</span>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+</header>

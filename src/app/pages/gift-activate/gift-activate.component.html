@@ -1,0 +1,90 @@
+<!-- Header -->
+<app-header></app-header>
+
+<div [ngSwitch]="viewStap">
+    <div *ngSwitchCase="'inp'">
+
+        <section class="lastick-widget-main">
+            <div class="lastick-widget-main_inner">
+                <div class="index_entrance index_entrance_cert sm">
+
+                    <header class="index_entrance-header">
+                        <div class="logo"></div>
+                    </header>
+
+                    <article class="index_entrance-article">
+                        <h1>{{'GiftActivate.Title' | translate }}</h1>
+                        <p>{{'GiftActivate.Description' | translate }}</p>
+                    </article>
+
+                    <div class="index_entrance-certificate">
+                        <form [formGroup]="certificateForm">
+                            <input type="text" formControlName="certificate" placeholder="{{ 'GiftActivate.Placeholder' | translate }}" class="b-input" />
+                            <!--<app-control-messages [control]="certificateForm.controls.certificate"></app-control-messages>-->
+                            <button (click)="activate()" class="button b-button" [disabled]="!certificateForm.valid">{{ 'GiftActivate.Activate' | translate }}</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <div *ngSwitchCase="'result'">
+
+        <section class="lastick-widget-main">
+            <div class="lastick-widget-main_inner">
+                <div class="index_entrance index_entrance_cert index_entrance_cert_activated sm">
+
+                    <header class="index_entrance-header">
+                        <div class="logo"></div>
+                    </header>
+
+                    <article class="index_entrance-article">
+                        <h1>{{'GiftActivated.Title' | translate }}</h1>
+                        <p>{{'GiftActivated.Description' | translate }}</p>
+                    </article>
+
+                  <!--<div class="index_entrance-certificate activated">-->
+                    <!--<div class="certificate-info">-->
+                      <!--<span class="number">№1111111</span>-->
+                      <!--<span class="info">Lorem ipsum dolor sit amet, consectetur.</span>-->
+                    <!--</div>-->
+                    <!--<div class="certificate-details">-->
+                      <!--<div class="detail-item detail1">-->
+                        <!--<div class="title">Lorem ipsum.</div>-->
+                        <!--<div class="value">5000 р</div>-->
+                      <!--</div>-->
+                      <!--<div class="detail-item detail2">-->
+                        <!--<div class="title">Lorem ipsum dolor.</div>-->
+                        <!--<div class="value">123213123</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <!--<button class="button b-button w-100" (click)="goEventsPage()">Lorem ipsum.</button>-->
+                  <!--</div>-->
+
+                    <div class="index_entrance-certificate activated" *ngIf="cart.certificate">
+                        <div class="certificate-info">
+                            <span class="number">№{{cart.certificate.ext_number}}</span>
+                            <span class="info" *ngIf="cart.certificate.meta.view.description">{{cart.certificate.meta.view.description | multilang}}</span>
+                        </div>
+                        <div class="certificate-details">
+                            <div class="detail-item detail1">
+                                <div class="title">{{'GiftActivated.Value' | translate }}</div>
+                                <div class="value">{{cart.certificate.PriceModifier.value | money}} р</div>
+                            </div>
+                            <div class="detail-item detail2">
+                                <div class="title">{{'GiftActivated.Denomination' | translate }}</div>
+                                <div class="value">{{validity_range[validity_range.length -1] | datecustom}}</div>
+                            </div>
+                        </div>
+                        <button class="button b-button w-100" (click)="goEventsPage()">{{'GiftActivated.BtnTxt' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
